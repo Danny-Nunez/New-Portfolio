@@ -6,7 +6,7 @@ import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import FloatingSocials from './components/FloatingSocials';
 import { generateHeroAssets, HeroAssets } from './services/geminiService';
-import { preloadAllImages } from './utils/imagePreloader';
+import { preloadCriticalImages, preloadNonCriticalImages } from './utils/imagePreloader';
 
 const App: React.FC = () => {
   const [assets, setAssets] = useState<HeroAssets | null>(null);
@@ -15,6 +15,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const initAssets = async () => {
+      const startTime = Date.now();
+      const MIN_LOAD_TIME = 800; // Minimum loader display time (800ms) for smooth UX
+      
       try {
         setLoading(true);
         
@@ -33,9 +36,24 @@ const App: React.FC = () => {
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });
 
-        // Preload all images before hiding loader
-        await preloadAllImages((loaded, total) => {
+        // Preload critical images first (hero section)
+        await preloadCriticalImages((loaded, total) => {
           setLoadingProgress({ loaded, total });
+        });
+
+        // Calculate elapsed time
+        const elapsed = Date.now() - startTime;
+        const remainingTime = Math.max(0, MIN_LOAD_TIME - elapsed);
+
+        // Wait for minimum load time if needed, then show content
+        await new Promise(resolve => setTimeout(resolve, remainingTime));
+        
+        // Hide loader and show content
+        setLoading(false);
+
+        // Continue loading non-critical images in background
+        preloadNonCriticalImages().catch(err => {
+          console.warn("Background image loading failed:", err);
         });
         
       } catch (err) {
@@ -54,11 +72,7 @@ const App: React.FC = () => {
           ],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });
-      } finally {
-        // Small delay to ensure smooth transition
-        setTimeout(() => {
-          setLoading(false);
-        }, 300);
+        setLoading(false);
       }
     };
 
@@ -68,26 +82,31 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#050505] relative">
       {loading ? (
-        <div className="flex flex-col items-center justify-center min-h-screen space-y-6">
+        <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-[#050505]">
           <div className="relative">
              <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
+                <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse"></div>
              </div>
           </div>
-          <div className="text-center px-6">
+          <div className="text-center px-6 max-w-sm">
             <p className="text-white font-bold tracking-widest uppercase text-xs mb-2">Architecting Your Experience</p>
-            <p className="text-gray-500 text-sm italic">
+            <p className="text-gray-400 text-sm mb-4">
               {loadingProgress.total > 0 
-                ? `Loading assets... ${loadingProgress.loaded}/${loadingProgress.total}`
+                ? `Loading critical assets... ${loadingProgress.loaded}/${loadingProgress.total}`
                 : 'Initializing environment...'}
             </p>
             {loadingProgress.total > 0 && (
-              <div className="mt-4 w-64 h-1 bg-white/10 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-red-600 transition-all duration-300 ease-out"
-                  style={{ width: `${(loadingProgress.loaded / loadingProgress.total) * 100}%` }}
-                />
+              <div className="space-y-2">
+                <div className="w-64 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-red-600 to-red-500 transition-all duration-300 ease-out shadow-lg shadow-red-600/50"
+                    style={{ width: `${(loadingProgress.loaded / loadingProgress.total) * 100}%` }}
+                  />
+                </div>
+                <p className="text-[10px] text-white/30 uppercase tracking-wider">
+                  {Math.round((loadingProgress.loaded / loadingProgress.total) * 100)}%
+                </p>
               </div>
             )}
           </div>

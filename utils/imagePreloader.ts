@@ -11,10 +11,9 @@ export const preloadImage = (src: string): Promise<void> => {
   });
 };
 
-// Get all images used in the application
-export const getAllImagePaths = (): string[] => {
-  // Hero section images
-  const heroImages = [
+// Get critical images (hero section - above the fold)
+export const getCriticalImagePaths = (): string[] => {
+  return [
     "/data/me1.png",
     "/data/me2.png",
     "/data/slideshow/01.jpg",
@@ -25,7 +24,10 @@ export const getAllImagePaths = (): string[] => {
     "/data/slideshow/06.png",
     "/data/slideshow/07.png"
   ];
+};
 
+// Get non-critical images (below the fold - can load in background)
+export const getNonCriticalImagePaths = (): string[] => {
   // About section credential logos
   const credentialImages = [
     "/data/harvard.png",
@@ -38,7 +40,6 @@ export const getAllImagePaths = (): string[] => {
   // Portfolio images
   const portfolioImages = [
     // TRADIANTIX
-    "/data/slideshow/04.png",
     "/data/tradiantixwide.png",
     "/data/tradiantix-web/trade1.png",
     "/data/tradiantix-web/trade2.png",
@@ -73,31 +74,33 @@ export const getAllImagePaths = (): string[] => {
     "/data/bri-web/bri-web2.png",
     "/data/bri-web/bri-web3.png",
     // CHAIN IMPERIUM
-    "/data/slideshow/03.jpg",
     "/data/chain-web/chain-wide.png",
     "/data/chain-web/chain-web1.png",
     "/data/chain-web/chain-web2.png",
     "/data/chain-web/chain-web3.png",
     // FACILPAY
-    "/data/slideshow/02.jpg",
     "/data/facil-web/facil-wide.png",
     "/data/facil-web/facil-web1.png",
     "/data/facil-web/facil-web2.png",
     "/data/facil-web/facil-web3.png"
   ];
 
-  // Combine all images and remove duplicates
-  const allImages = [...heroImages, ...credentialImages, ...portfolioImages];
-  return Array.from(new Set(allImages)); // Remove duplicates
+  // Combine and remove duplicates
+  const allImages = [...credentialImages, ...portfolioImages];
+  return Array.from(new Set(allImages));
 };
 
-// Preload all images
-export const preloadAllImages = async (onProgress?: (loaded: number, total: number) => void): Promise<void> => {
-  const imagePaths = getAllImagePaths();
+// Get all images used in the application
+export const getAllImagePaths = (): string[] => {
+  return [...getCriticalImagePaths(), ...getNonCriticalImagePaths()];
+};
+
+// Preload critical images first (for fast initial render)
+export const preloadCriticalImages = async (onProgress?: (loaded: number, total: number) => void): Promise<void> => {
+  const imagePaths = getCriticalImagePaths();
   const total = imagePaths.length;
   let loaded = 0;
 
-  // Load images in parallel with progress tracking
   await Promise.all(
     imagePaths.map(async (src) => {
       await preloadImage(src);
@@ -107,5 +110,29 @@ export const preloadAllImages = async (onProgress?: (loaded: number, total: numb
       }
     })
   );
+};
+
+// Preload non-critical images in background
+export const preloadNonCriticalImages = async (onProgress?: (loaded: number, total: number) => void): Promise<void> => {
+  const imagePaths = getNonCriticalImagePaths();
+  const total = imagePaths.length;
+  let loaded = 0;
+
+  // Load images in parallel but don't block
+  await Promise.all(
+    imagePaths.map(async (src) => {
+      await preloadImage(src);
+      loaded++;
+      if (onProgress) {
+        onProgress(loaded, total);
+      }
+    })
+  );
+};
+
+// Preload all images (legacy function - kept for compatibility)
+export const preloadAllImages = async (onProgress?: (loaded: number, total: number) => void): Promise<void> => {
+  await preloadCriticalImages(onProgress);
+  await preloadNonCriticalImages(onProgress);
 };
 
