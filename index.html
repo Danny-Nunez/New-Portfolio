@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Danny Nunez | Design Engineer & Fullstack Developer</title>
+    <meta name="title" content="Danny Nunez | Design Engineer & Fullstack Developer" />
+    <meta name="description" content="Design Engineer & Fullstack Developer with 8+ years of experience. Specializing in React, TypeScript, Node.js, and creating high-performance digital products that bridge design and engineering." />
+    <meta name="keywords" content="Design Engineer, Fullstack Developer, React, TypeScript, Node.js, Web Development, UI/UX Design, Frontend Developer, Backend Developer" />
+    <meta name="author" content="Danny Nunez" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dannyfullstack.dev/" />
+    <meta property="og:title" content="Danny Nunez | Design Engineer & Fullstack Developer" />
+    <meta property="og:description" content="Design Engineer & Fullstack Developer with 8+ years of experience. Specializing in React, TypeScript, Node.js, and creating high-performance digital products." />
+    <meta property="og:image" content="https://dannyfullstack.dev/avatars/me1.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://dannyfullstack.dev/" />
+    <meta property="twitter:title" content="Danny Nunez | Design Engineer & Fullstack Developer" />
+    <meta property="twitter:description" content="Design Engineer & Fullstack Developer with 8+ years of experience. Specializing in React, TypeScript, Node.js, and creating high-performance digital products." />
+    <meta property="twitter:image" content="https://dannyfullstack.dev/avatars/me1.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/fav.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/fav.ico" />
+    <link rel="apple-touch-icon" href="/fav.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        background-color: #000;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+      }
+      .font-playfair {
+        font-family: 'Playfair Display', serif;
+      }
+      .font-inter-black {
+        font-weight: 900;
+      }
+      
+      /* Technical Grid Background - Neutralized */
+      .bg-grid {
+        background-size: 50px 50px;
+        background-image: 
+          linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      }
+
+      /* Hide scrollbar */
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Image Card Shine */
+      .card-shine {
+        position: relative;
+        overflow: hidden;
+      }
+      .card-shine::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent 45%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 55%
+        );
+        transform: rotate(-45deg);
+        animation: shine 10s infinite;
+      }
+      @keyframes shine {
+        0% { transform: translateX(-100%) rotate(-45deg); }
+        20%, 100% { transform: translateX(100%) rotate(-45deg); }
+      }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react": "https://esm.sh/react@^19.2.3",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "@google/genai": "https://esm.sh/@google/genai@^1.35.0"
+      }
+    }
+    </script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
