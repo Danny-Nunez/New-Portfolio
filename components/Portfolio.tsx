@@ -23,24 +23,24 @@ const allProjects: Project[] = [
     title: "TRADIANTIX",
     category: "AI STOCK TRADING PLATFORM",
     year: "2025",
-    image: "./data/slideshow/04.png",
-    modalImage: "./data/tradiantixwide.png",
+    image: "/data/slideshow/04.png",
+    modalImage: "/data/tradiantixwide.png",
     stack: ["NODE.JS", "NEXTJS", "MYSQL"],
     description: "Tradiantix is an AI-driven stock trading application built with Next.js, MySQL, and real-time market data from Polygon.io. The platform was engineered for low-latency trade execution, enabling instant buy and sell actions for favorited stocks. I designed and built a custom physical trading dongle that triggers trades directly from the app—developed end-to-end and currently in patent-pending (provisional) status. The platform also leverages AI to analyze live market news, surface high-potential stocks, and automatically generate buy/sell recommendations based on market signals and trend analysis. Result: A fast, extensible trading system combining real-time data, AI-driven insights, and novel hardware interaction.",
     githubUrl: "https://github.com/username/tradiantix",
     liveUrl: "https://tradiantix.com",
     webScreenshots: [
-      "./data/tradiantix-web/trade1.png",
-      "./data/tradiantix-web/trade2.png",
-      "./data/tradiantix-web/trade3.png"
+      "/data/tradiantix-web/trade1.png",
+      "/data/tradiantix-web/trade2.png",
+      "/data/tradiantix-web/trade3.png"
     ]
   },
   {
     title: "NEGOZEE",
     category: "LATIN SOCIAL NETWORKING PLATFORM FOR PROFESSIONALS",
     year: "2025",
-    image: "./data/negozee.png",
-    modalImage: "./data/negozeewide.png",
+    image: "/data/negozee.png",
+    modalImage: "/data/negozeewide.png",
     stack: ["PYTHON", "WORDPRESS", "AWS", "PHP"],
     description: "Negozee's WordPress + BuddyBoss platform was crashing under user search and struggling to support its mobile app. I migrated the site from DigitalOcean to Rapyd Cloud, a BuddyBoss-specialized host, then optimized database indexing and restructured username search logic to eliminate crashes and drastically improve load times. With the web platform stabilized, I built custom API endpoints and rebuilt the mobile app using Expo, enabling a single codebase for iOS and Android. Result: Faster site performance, stable search, and scalable mobile infrastructure—helping Negozee grow from 10,000 to 40,000 users.",
     githubUrl: "https://github.com/Danny-Nunez/Negozee-App",
@@ -48,89 +48,89 @@ const allProjects: Project[] = [
     appStoreUrl: "https://apps.apple.com/app/negozee",
     googlePlayUrl: "https://play.google.com/store/apps/details?id=com.negozee",
     webScreenshots: [
-      "./data/negozee-web-app/web1.png",
-      "./data/negozee-web-app/web2.png",
-      "./data/negozee-web-app/web3.png"
+      "/data/negozee-web-app/web1.png",
+      "/data/negozee-web-app/web2.png",
+      "/data/negozee-web-app/web3.png"
     ],
     mobileScreenshots: [
-      "./data/negozee-mobile-app/app1.webp",
-      "./data/negozee-mobile-app/app2.webp",
-      "./data/negozee-mobile-app/app3.webp",
-      "./data/negozee-mobile-app/app4.webp",
-      "./data/negozee-mobile-app/app5.webp",
-      "./data/negozee-mobile-app/app6.webp"
+      "/data/negozee-mobile-app/app1.webp",
+      "/data/negozee-mobile-app/app2.webp",
+      "/data/negozee-mobile-app/app3.webp",
+      "/data/negozee-mobile-app/app4.webp",
+      "/data/negozee-mobile-app/app5.webp",
+      "/data/negozee-mobile-app/app6.webp"
     ]
   },
   {
     title: "BEATINBOX",
     category: "FREE MUSIC STREAMING PLATFORM",
     year: "2025",
-    image: "./data/beatinbox.png",
-    modalImage: "./data/beatinbox-web/beatinbox-wide.png",
+    image: "/data/beatinbox.png",
+    modalImage: "/data/beatinbox-web/beatinbox-wide.png",
     stack: ["NODE.JS", "EXPRESS", "NEXTJS", "POSTGRES"],
     description: "Beatinbox started as a personal frustration: coding while streaming music on YouTube meant constant interruptions from ads. I built Beatinbox to solve that problem—an uninterrupted, developer-friendly music experience. The backend was built with Express, paired with a Next.js frontend. The mobile app was developed in TypeScript using Expo, allowing a single codebase across iOS and Android. For data management, I used PostgreSQL with Prisma to handle playlists, playlist sharing, and user data with a clean, scalable schema. Result: A full-stack, cross-platform music app built to remove friction from the developer workflow and keep focus uninterrupted.",
     githubUrl: "https://github.com/Danny-Nunez/Music",
     liveUrl: "https://beatinbox.com",
     webScreenshots: [
-      "./data/beatinbox-web/beatinbox-web1.png",
-      "./data/beatinbox-web/beatinbox-web2.png",
-      "./data/beatinbox-web/beatinbox-web3.png"
+      "/data/beatinbox-web/beatinbox-web1.png",
+      "/data/beatinbox-web/beatinbox-web2.png",
+      "/data/beatinbox-web/beatinbox-web3.png"
     ],
     mobileScreenshots: [
-      "./data/beatinbox-mobile-app/app1.png",
-      "./data/beatinbox-mobile-app/app2.png",
-      "./data/beatinbox-mobile-app/app3.png",
-      "./data/beatinbox-mobile-app/app4.png",
-      "./data/beatinbox-mobile-app/app5.png",
-      "./data/beatinbox-mobile-app/app6.png"
+      "/data/beatinbox-mobile-app/app1.png",
+      "/data/beatinbox-mobile-app/app2.png",
+      "/data/beatinbox-mobile-app/app3.png",
+      "/data/beatinbox-mobile-app/app4.png",
+      "/data/beatinbox-mobile-app/app5.png",
+      "/data/beatinbox-mobile-app/app6.png"
     ]
   },
   {
     title: "BILL OF RIGHTS INSTITUTE",
     category: "CIVIC EDUCATION WEBSITE",
     year: "2025",
-    image: "./data/bri.png",
-    modalImage: "./data/bri-web/bri-web1.png",
+    image: "/data/bri.png",
+    modalImage: "/data/bri-web/bri-web1.png",
     stack: ["NEXTJS", "NODEJS", "WORDPRESS", "AWS", "PHP", "MYSQL", "PYTHON", "JAVASCRIPT", "FASTAPI"],
     description: "I’m deeply passionate about my work with the Bill of Rights Institute. Its mission—to support educators and empower students to become civically engaged citizens—felt especially important in a time of global uncertainty. Understanding where we come from is essential to knowing where we’re going. BRI’s decoupled architecture impressed me from the start, as it allowed us to leverage modern, industry-standard tools like Next.js and Amazon Web Services to rapidly integrate and scale new features. When I took over the platform, it had been pieced together by multiple contractors, resulting in inconsistent UX, slow APIs, and underutilized tools. I led efforts to streamline the user experience, implemented improved analytics to track real user interactions, and connected dashboard features to live, meaningful data. I also optimized backend performance—reducing API load times by 75%—which made the educator and student dashboards genuinely usable. The result is a modern civic education platform built with Next.js, FastAPI, WordPress, and AWS, delivering interactive lessons, educator resources, assessments, and multimedia content at scale.",
     githubUrl: "https://github.com/billofrightsinstitute/billofrights-website",
     liveUrl: "https://billofrightsinstitute.org",
     webScreenshots: [
-      "./data/bri-web/bri-web1.png",
-      "./data/bri-web/bri-web2.png",
-      "./data/bri-web/bri-web3.png"
+      "/data/bri-web/bri-web1.png",
+      "/data/bri-web/bri-web2.png",
+      "/data/bri-web/bri-web3.png"
     ]
   },
   {
     title: "CHAIN IMPERIUM",
     category: "BLOCK CHAIN MARKETING COMPANY",
     year: "2024",
-    image: "./data/slideshow/03.jpg",
-    modalImage: "./data/chain-web/chain-wide.png",
+    image: "/data/slideshow/03.jpg",
+    modalImage: "/data/chain-web/chain-wide.png",
     stack: ["NEXTJS", "NODEJS"],
     description: "A blockchain marketing agency website showcasing services and case studies in the cryptocurrency and blockchain space. Built with Next.js for fast loading times and Node.js for server-side functionality. Features include service portfolios, client testimonials, blog integration, and contact forms for lead generation.",
     githubUrl: "https://github.com/Danny-Nunez/chain-imperium",
     liveUrl: "https://chainimperium.com",
     webScreenshots: [
-      "./data/chain-web/chain-web1.png",
-      "./data/chain-web/chain-web2.png",
-      "./data/chain-web/chain-web3.png"
+      "/data/chain-web/chain-web1.png",
+      "/data/chain-web/chain-web2.png",
+      "/data/chain-web/chain-web3.png"
     ]
   },
   {
     title: "FACILPAY",
     category: "BLOCKCHAIN MOBILE MESSAGING APP",
     year: "2024",
-    image: "./data/slideshow/02.jpg",
-    modalImage: "./data/facil-web/facil-wide.png",
+    image: "/data/slideshow/02.jpg",
+    modalImage: "/data/facil-web/facil-wide.png",
     stack: ["NEXTJS", "NODEJS"],
     description: "A blockchain-based mobile messaging application with integrated payment functionality. Built with Next.js for cross-platform compatibility and Node.js for real-time messaging infrastructure. Features include end-to-end encryption, cryptocurrency wallet integration, peer-to-peer transactions, and secure group messaging.",
     githubUrl: "https://github.com/Danny-Nunez/Facil",
     liveUrl: "https://facil-pay.vercel.app/services",
     webScreenshots: [
-      "./data/facil-web/facil-web1.png",
-      "./data/facil-web/facil-web2.png",
-      "./data/facil-web/facil-web3.png"
+      "/data/facil-web/facil-web1.png",
+      "/data/facil-web/facil-web2.png",
+      "/data/facil-web/facil-web3.png"
     ]
   }
   // Add more projects here to show in the full archive
@@ -138,7 +138,7 @@ const allProjects: Project[] = [
   //   title: "PROJECT NAME",
   //   category: "CATEGORY",
   //   year: "YEAR",
-  //   image: "./data/project-image.png",
+  //   image: "/data/project-image.png",
   //   stack: ["TECH", "STACK"]
   // },
 ];

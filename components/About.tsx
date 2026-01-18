@@ -83,7 +83,7 @@ const About: React.FC<AboutProps> = () => {
                 className="group relative cursor-pointer"
               >
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:border-red-600/50 transition-all duration-300 hover:bg-white/10">
-                  <img src='./data/harvard.png' alt="Harvard" className="w-10 h-10 md:w-12 md:h-12" />
+                  <img src='/data/harvard.png' alt="Harvard" className="w-10 h-10 md:w-12 md:h-12" />
                 </div>
                 <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-[8px] uppercase tracking-widest text-white/40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">HARVARD</span>
               </a>
@@ -96,7 +96,7 @@ const About: React.FC<AboutProps> = () => {
                 className="group relative cursor-pointer"
               >
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:border-red-600/50 transition-all duration-300 hover:bg-white/10">
-                  <img src='./data/mit.png' alt="MIT" className="w-10 h-10 md:w-12 md:h-12" />
+                  <img src='/data/mit.png' alt="MIT" className="w-10 h-10 md:w-12 md:h-12" />
                 </div>
                 <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-[8px] uppercase tracking-widest text-white/40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">MIT XPRO</span>
               </a>
@@ -109,7 +109,7 @@ const About: React.FC<AboutProps> = () => {
                 className="group relative cursor-pointer"
               >
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:border-red-600/50 transition-all duration-300 hover:bg-white/10">
-                  <img src='./data/meta.png' alt="META" className="w-10 h-10 md:w-12 md:h-12" />
+                  <img src='/data/meta.png' alt="META" className="w-10 h-10 md:w-12 md:h-12" />
                 </div>
                 <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-[8px] uppercase tracking-widest text-white/40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">META FRONTEND</span>
               </a>
@@ -120,7 +120,7 @@ const About: React.FC<AboutProps> = () => {
                 className="group relative cursor-pointer"
               >
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:border-red-600/50 transition-all duration-300 hover:bg-white/10">
-                  <img src='./data/meta.png' alt="META" className="w-10 h-10 md:w-12 md:h-12" />
+                  <img src='/data/meta.png' alt="META" className="w-10 h-10 md:w-12 md:h-12" />
                 </div>
                 <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-[8px] uppercase tracking-widest text-white/40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">META JAVASCRIPT</span>
               </a>
@@ -133,7 +133,7 @@ const About: React.FC<AboutProps> = () => {
                 className="group relative cursor-pointer"
               >
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:border-red-600/50 transition-all duration-300 hover:bg-white/10">
-                 <img src='./data/google.png' alt="GOOGLE" className="w-10 h-10 md:w-12 md:h-12" />
+                 <img src='/data/google.png' alt="GOOGLE" className="w-10 h-10 md:w-12 md:h-12" />
                 </div>
                 <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-[8px] uppercase tracking-widest text-white/40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">GOOGLE UX/UI</span>
               </a>
@@ -145,7 +145,7 @@ const About: React.FC<AboutProps> = () => {
                 className="group relative cursor-pointer"
               >
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:border-red-600/50 transition-all duration-300 hover:bg-white/10">
-                  <img src='./data/ucdavis.png' alt="UCDAVIS" className="w-10 h-10 md:w-12 md:h-12" />
+                  <img src='/data/ucdavis.png' alt="UCDAVIS" className="w-10 h-10 md:w-12 md:h-12" />
                 </div>
                 <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-[8px] uppercase tracking-widest text-white/40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">UCDAVIS SEO</span>
               </a>

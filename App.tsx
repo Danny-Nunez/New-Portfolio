@@ -7,15 +7,6 @@ import Contact from './components/Contact';
 import FloatingSocials from './components/FloatingSocials';
 import { generateHeroAssets, HeroAssets } from './services/geminiService';
 
-// Import slideshow images
-import slide01 from './data/slideshow/01.jpg';
-import slide02 from './data/slideshow/02.jpg';
-import slide03 from './data/slideshow/03.jpg';
-import slide04 from './data/slideshow/04.png';
-import slide05 from './data/slideshow/05.png';
-import slide06 from './data/slideshow/06.png';
-import slide07 from './data/slideshow/07.png';
-
 const App: React.FC = () => {
   const [assets, setAssets] = useState<HeroAssets | null>(null);
   const [loading, setLoading] = useState(true);
@@ -26,15 +17,15 @@ const App: React.FC = () => {
         setLoading(true);
         // Use local slideshow images directly
         setAssets({
-          foreground: "./data/me1.png",
+          foreground: "/data/me1.png",
           background: [
-            slide01,
-            slide02,
-            slide03,
-            slide04,
-            slide05,
-            slide06,
-            slide07
+            "/data/slideshow/01.jpg",
+            "/data/slideshow/02.jpg",
+            "/data/slideshow/03.jpg",
+            "/data/slideshow/04.png",
+            "/data/slideshow/05.png",
+            "/data/slideshow/06.png",
+            "/data/slideshow/07.png"
           ],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });
@@ -44,13 +35,13 @@ const App: React.FC = () => {
         setAssets({
           foreground: "https://dannyfullstack.dev/avatars/me1.png",
           background: [
-            slide01,
-            slide02,
-            slide03,
-            slide04,
-            slide05,
-            slide06,
-            slide07
+            "/data/slideshow/01.jpg",
+            "/data/slideshow/02.jpg",
+            "/data/slideshow/03.jpg",
+            "/data/slideshow/04.png",
+            "/data/slideshow/05.png",
+            "/data/slideshow/06.png",
+            "/data/slideshow/07.png"
           ],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });

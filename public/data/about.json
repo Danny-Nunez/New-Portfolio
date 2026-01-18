@@ -1,0 +1,156 @@
+{
+  "name": "Danny",
+  "title": "Design Engineer & Fullstack Developer",
+  "experience": "8+",
+  "currentRole": "Full stack developer at Bill of Rights Institute",
+  "location": "Washington DC-Baltimore Area",
+  "philosophy": [
+    "Architecting digital harmony",
+    "Elegance in every pixel"
+  ],
+  "description": "World-class Design Engineer and Fullstack Developer with over 8 years of experience. Certified in Full Stack Development with MERN, UX Design, and AWS.",
+  "expertise": [
+    "Bridging the gap between conceptual design (Figma) and technical implementation (React, TypeScript, Node.js)",
+    "High-performance digital products that are visually resonant and perform flawlessly",
+    "Full-stack development with MERN stack and modern web technologies"
+  ],
+  "technicalStack": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "MongoDB",
+    "Express",
+    "PostgreSQL",
+    "AWS",
+    "JavaScript",
+    "Complex UI/UX design systems",
+    "Figma"
+  ],
+  "certifications": [
+    {
+      "name": "Full Stack Development with MERN",
+      "issuer": "MIT xPRO",
+      "date": "Jul 2023",
+      "credentialId": "802483",
+      "skills": ["JavaScript", "Next.js", "Node.js", "React.js", "MongoDB", "Express.js", "API Development"]
+    },
+    {
+      "name": "Google SEO Fundamentals",
+      "issuer": "UC Davis Learning & Organizational Development",
+      "date": "May 2023",
+      "credentialId": "W4XY953739WK",
+      "skills": ["Data Analysis", "Analytics", "Web Analytics", "Search Engine Optimization (SEO)", "Analytical Skills", "Google Analytics"]
+    },
+    {
+      "name": "Programming with Javascript",
+      "issuer": "Meta",
+      "date": "Apr 2023",
+      "credentialId": "6MSHPGVCLR9Y"
+    },
+    {
+      "name": "CS50's Introduction to Computer Science",
+      "issuer": "edX",
+      "date": "Jan 2023",
+      "credentialId": "ab11a3e651634475a0e41dca2f326974"
+    },
+    {
+      "name": "Foundations of User Experience (UX) Design",
+      "issuer": "Google",
+      "date": "Nov 2022",
+      "credentialId": "3E3MHWM2PHU6"
+    },
+    {
+      "name": "Introduction to Front-End Development",
+      "issuer": "Meta",
+      "date": "Nov 2022",
+      "credentialId": "2NAKJRD9XRSC"
+    },
+    {
+      "name": "AWS Certifications",
+      "issuer": "edX",
+      "credentialId": "9abe1e9e01c54b5a994c2d29c08f272d"
+    }
+  ],
+  "workExperience": [
+    {
+      "company": "Bill of Rights Institute",
+      "role": "Full-stack Developer",
+      "period": "Aug 2023 - Present",
+      "duration": "2 yrs 6 mos",
+      "location": "Virginia, United States · Hybrid",
+      "highlights": [
+        "Spearheading the planning, implementation, management, monitoring, and enhancement of the organization's website",
+        "Proficiently developing, integrating, and deploying applications using a wide array of front-end, back-end, database, and hosting tools",
+        "Demonstrating expertise across the entire technology stack, encompassing coding, UI/UX design, database integrations, and deployment operations",
+        "Independently delivering software products in alignment with functional specifications",
+        "Collaborating seamlessly with third-party website developers and overseeing associated projects",
+        "Vigilantly identifying and responding to potential website security breaches while enforcing robust security measures",
+        "Handling DNS and DNS redirects for optimal website performance",
+        "Developing growth strategies to expand the subscriber base and boost web traffic metrics"
+      ]
+    },
+    {
+      "company": "ArtemisVision",
+      "role": "Founder - Full Stack Developer",
+      "period": "Feb 2020 - Jul 2023",
+      "duration": "3 yrs 6 mos",
+      "location": "Maryland, United States · Hybrid",
+      "highlights": [
+        "Maintaining all areas of development for the world's first NFT Social Media Marketplace",
+        "Managing and maintaining the GitHub codebase to ensure code quality and best practices",
+        "Overseeing the design and code development process to deliver a responsive and visually stunning user interface",
+        "Reviewing and optimizing the web 3 architecture to ensure scalability, security, and optimal performance",
+        "Implementing fallback cloud servers to enhance load time while maintaining IPFS protocols",
+        "Utilizing Agile and Scrum methodologies to facilitate collaboration among cross-functional teams",
+        "Leveraging expertise in AWS Cloud infrastructure to design and deploy scalable and reliable solutions"
+      ]
+    },
+    {
+      "company": "T-Mobile",
+      "role": "Senior Full Stack Developer",
+      "period": "Oct 2014 - Mar 2023",
+      "duration": "8 yrs 6 mos",
+      "location": "Maryland, United States",
+      "highlights": [
+        "Conducting in-depth analysis of platform needs and delivering effective solutions",
+        "Contributing valuable insights towards multi-channel growth optimization strategy",
+        "Managing and continuously optimizing Paid Search campaigns",
+        "Leading A/B and multi-variant tests from ideation to analysis",
+        "Designing and developing engaging user interfaces utilizing HTML/CSS, JavaScript, and jQuery",
+        "Developing robust back-end website applications using PHP/MySQL",
+        "Integrating data from multiple back-end services and databases",
+        "Collaborating effectively with cross-functional teams using Agile development methodologies"
+      ]
+    },
+    {
+      "company": "Tax Terminal.com",
+      "role": "Web Developer",
+      "period": "Feb 2011 - Feb 2014",
+      "duration": "3 yrs 1 mo",
+      "location": "United States · Remote",
+      "highlights": [
+        "Building and maintaining front-end UI/UX designs to ensure an optimal user experience",
+        "Translating design concepts into functional HTML, JavaScript, and CSS code",
+        "Developing and maintaining the user interface of websites and web applications",
+        "Implementing designs that are mobile-responsive and optimized for all devices",
+        "Following SEO best practices and optimizing web content"
+      ]
+    },
+    {
+      "company": "NY Design Company",
+      "role": "Full Stack Developer",
+      "period": "Feb 2008 - Feb 2011",
+      "duration": "3 yrs 1 mo",
+      "location": "New York, United States · Hybrid",
+      "highlights": [
+        "Leading and managing the complete software development lifecycle",
+        "Designing, developing, and maintaining scalable and responsive web applications",
+        "Creating custom modules and plugins for CMS web applications",
+        "Providing technical guidance and training to team members on CMS systems"
+      ]
+    }
+  ],
+  "tone": "Professional, innovative, slightly technical but accessible, and confident",
+  "focus": "Bespoke digital architecture",
+  "greeting": "Hey there!"
+}
