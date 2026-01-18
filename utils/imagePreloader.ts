@@ -16,6 +16,7 @@ export const getAllImagePaths = (): string[] => {
   // Hero section images
   const heroImages = [
     "/data/me1.png",
+    "/data/me2.png",
     "/data/slideshow/01.jpg",
     "/data/slideshow/02.jpg",
     "/data/slideshow/03.jpg",

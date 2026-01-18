@@ -119,7 +119,7 @@ const DannyChat: React.FC = () => {
       {/* Header */}
       <div className="p-6 border-b border-white/5 flex items-center justify-between bg-black/20">
         <div className="flex items-center space-x-3">
-          <img src="/me2.png" alt="Danny" className="w-12 h-12 rounded-full object-cover border border-white/10" />
+          <img src="/data/me2.png" alt="Danny" className="w-12 h-12 rounded-full object-cover border border-white/10" />
           <span className="text-[10px] uppercase tracking-[0.3em] font-black text-white/70">Ask Danny</span>
         </div>
         <div className="w-2 h-2 rounded-full bg-white/10" />
