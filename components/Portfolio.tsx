@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import ArchivedProjectsList from './ArchivedProjectsList';
 
 interface Project {
   title: string;
@@ -148,15 +149,19 @@ const INITIAL_PROJECTS_COUNT = 4;
 const Portfolio: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [showArchivedProjects, setShowArchivedProjects] = useState(false);
   
   const displayedProjects = isExpanded ? allProjects : allProjects.slice(0, INITIAL_PROJECTS_COUNT);
 
   // Close modal on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedProject(null);
+      if (e.key === 'Escape') {
+        setSelectedProject(null);
+        setShowArchivedProjects(false);
+      }
     };
-    if (selectedProject) {
+    if (selectedProject || showArchivedProjects) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden'; // Prevent body scroll when modal is open
     }
@@ -164,7 +169,7 @@ const Portfolio: React.FC = () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [selectedProject]);
+  }, [selectedProject, showArchivedProjects]);
   return (
     <section id="portfolio" className="relative w-full py-32 bg-black px-6 md:px-20 overflow-hidden">
       {/* Decorative Technical Background */}
@@ -247,7 +252,7 @@ const Portfolio: React.FC = () => {
         </div>
 
         {/* CTA Footer */}
-        <div className="mt-40 text-center">
+        <div className="mt-40 text-center space-y-6">
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
             className="text-white/30 hover:text-white transition-colors flex flex-col items-center mx-auto group"
@@ -257,6 +262,26 @@ const Portfolio: React.FC = () => {
             </span>
             <div className={`w-px bg-gradient-to-b from-red-600 to-transparent group-hover:h-32 transition-all duration-700 ${isExpanded ? 'h-32' : 'h-20'}`} />
           </button>
+          
+          {/* View Archived Projects Button - Shows when archive is expanded */}
+          {isExpanded && (
+            <div className="flex justify-center">
+              <button 
+                onClick={() => setShowArchivedProjects(true)}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-600/50 text-white/60 hover:text-red-600 text-xs uppercase tracking-[0.3em] font-black rounded-full transition-all duration-300 hover:scale-105 group"
+              >
+                <span>View Archived Projects</span>
+                <svg 
+                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -459,6 +484,13 @@ const Portfolio: React.FC = () => {
             ) : null}
           </div>
         </div>
+      )}
+
+      {/* Archived Projects Modal */}
+      {showArchivedProjects && (
+        <ArchivedProjectsList
+          onClose={() => setShowArchivedProjects(false)}
+        />
       )}
 
       <style>{`

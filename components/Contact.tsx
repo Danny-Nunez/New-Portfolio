@@ -1,11 +1,37 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { sendEmail } from '../services/emailService';
+import Globe from './Globe';
 
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [errorMessage, setErrorMessage] = useState('');
+  const [isGlobeVisible, setIsGlobeVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Show globe when section is in view, hide when it's out (scroll up or down)
+          setIsGlobeVisible(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.95, // Trigger when 10% of the section is visible
+        rootMargin: '0px', // No margin to ensure accurate detection when leaving viewport
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +52,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative w-full py-32 bg-[#050505] px-6 md:px-20 overflow-hidden">
+    <section ref={sectionRef} id="contact" className="relative w-full py-12 bg-[#050505] px-6 md:px-20 overflow-hidden">
       {/* Technical Background Decor */}
       <div className="absolute inset-0 bg-grid opacity-[0.02] pointer-events-none" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -47,12 +73,24 @@ const Contact: React.FC = () => {
             </div>
 
             <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-md">
-              Available for bespoke architectural digital projects and engineering consultations. 
-              Let's bridge the gap between vision and reality.
+            Have an idea you want to build?
+            I’m usually down to help.
             </p>
 
-            <div className="space-y-8">
-              <div className="group flex items-center space-x-6 cursor-pointer">
+            <div className="relative space-y-8">
+              {/* Globe Background - Hidden initially, animates in from bottom on scroll */}
+              <div 
+                className={`absolute -left-20 -top-10 w-[500px] h-[500px] md:w-[600px] md:h-[600px] pointer-events-none z-0 transition-all duration-1000 ease-out ${
+                  isGlobeVisible 
+                    ? 'opacity-20 translate-y-0' 
+                    : 'opacity-0 translate-y-32'
+                }`}
+              >
+                <Globe className="w-full h-full" />
+              </div>
+              
+              {/* Email and Location - positioned above globe */}
+              <div className="group flex items-center space-x-6 cursor-pointer relative z-10">
                 <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-600/10 transition-all duration-500">
                   <svg className="w-5 h-5 text-white/40 group-hover:text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
