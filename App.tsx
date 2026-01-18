@@ -6,16 +6,19 @@ import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import FloatingSocials from './components/FloatingSocials';
 import { generateHeroAssets, HeroAssets } from './services/geminiService';
+import { preloadAllImages } from './utils/imagePreloader';
 
 const App: React.FC = () => {
   const [assets, setAssets] = useState<HeroAssets | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState({ loaded: 0, total: 0 });
 
   useEffect(() => {
     const initAssets = async () => {
       try {
         setLoading(true);
-        // Use local slideshow images directly
+        
+        // Set assets first
         setAssets({
           foreground: "/data/me1.png",
           background: [
@@ -29,6 +32,12 @@ const App: React.FC = () => {
           ],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });
+
+        // Preload all images before hiding loader
+        await preloadAllImages((loaded, total) => {
+          setLoadingProgress({ loaded, total });
+        });
+        
       } catch (err) {
         console.error("App: Error loading assets.", err);
         // Fallback to slideshow images
@@ -46,7 +55,10 @@ const App: React.FC = () => {
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });
       } finally {
-        setLoading(false);
+        // Small delay to ensure smooth transition
+        setTimeout(() => {
+          setLoading(false);
+        }, 300);
       }
     };
 
@@ -65,7 +77,19 @@ const App: React.FC = () => {
           </div>
           <div className="text-center px-6">
             <p className="text-white font-bold tracking-widest uppercase text-xs mb-2">Architecting Your Experience</p>
-            <p className="text-gray-500 text-sm italic">Initializing environment...</p>
+            <p className="text-gray-500 text-sm italic">
+              {loadingProgress.total > 0 
+                ? `Loading assets... ${loadingProgress.loaded}/${loadingProgress.total}`
+                : 'Initializing environment...'}
+            </p>
+            {loadingProgress.total > 0 && (
+              <div className="mt-4 w-64 h-1 bg-white/10 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-red-600 transition-all duration-300 ease-out"
+                  style={{ width: `${(loadingProgress.loaded / loadingProgress.total) * 100}%` }}
+                />
+              </div>
+            )}
           </div>
         </div>
       ) : (
