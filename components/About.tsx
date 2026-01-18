@@ -20,9 +20,12 @@ const About: React.FC<AboutProps> = () => {
 
   const getParallaxValue = (factor: number) => {
     if (!sectionRef.current) return 0;
+    // Reduce parallax effect on mobile to prevent overlap issues
+    const isMobile = window.innerWidth < 768;
+    const adjustedFactor = isMobile ? factor * 0.3 : factor;
     const offsetTop = sectionRef.current.offsetTop;
     const distance = scrollY - offsetTop;
-    return distance * factor;
+    return distance * adjustedFactor;
   };
 
   return (
@@ -154,7 +157,7 @@ const About: React.FC<AboutProps> = () => {
         </div>
 
         {/* Right Visual (Parallax AI Chat Window) - Now order-2 to appear under text on mobile */}
-        <div className="order-2 lg:order-2 flex justify-center relative mt-12 lg:mt-0">
+        <div className="order-2 lg:order-2 flex justify-center relative mt-12 lg:mt-0 z-[250]">
           <div 
             className="relative w-full flex justify-center"
             style={{ transform: `translateY(${getParallaxValue(0.1)}px)` }}

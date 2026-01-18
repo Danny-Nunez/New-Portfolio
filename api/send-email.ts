@@ -40,7 +40,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       apiKey: mailerSendKey,
     });
 
-    const sentFrom = new Sender("noreply@dannyfullstack.dev", "Danny Fullstack Portfolio");
+    const sentFrom = new Sender("noreply@test-86org8eyp7kgew13.mlsender.net", "Danny Fullstack Portfolio");
     const recipients = [
       new Recipient("dnunez22@gmail.com", "Danny Nunez")
     ];

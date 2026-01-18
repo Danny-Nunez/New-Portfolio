@@ -42,11 +42,6 @@ const FloatingSocials: React.FC = () => {
           rel="noopener noreferrer"
           className="group relative flex items-center justify-end"
         >
-          {/* Label revealed on hover */}
-          <span className="mr-4 px-3 py-1 bg-red-600 text-white text-[10px] font-black tracking-[0.3em] uppercase rounded-sm opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
-            {link.name}
-          </span>
-          
           {/* Circular Button */}
           <div className="w-12 h-12 flex items-center justify-center bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-full text-white/40 group-hover:text-white group-hover:border-red-600 group-hover:bg-red-600/10 transition-all duration-500 shadow-2xl">
             {link.icon}

@@ -87,7 +87,7 @@ const Hero: React.FC<HeroProps> = ({ assets }) => {
             onClick={() => handleNavLinkClick('home')}
             className="text-white font-black tracking-tighter text-lg uppercase select-none cursor-pointer"
           >
-            Danny
+            
           </button>
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
