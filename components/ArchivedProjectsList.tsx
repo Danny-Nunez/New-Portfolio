@@ -34,6 +34,34 @@ const archivedProjects: Project[] = [
     liveUrl: "https://chatbotai-three.vercel.app/",
   },
   {
+    title: "LYFTEATS",
+    category: "MIT CAPSTONE PROJECT, NEXTJS, SWAGGER, REST API, MONGODB",
+    year: "2023",
+    githubUrl: "https://github.com/Danny-Nunez/lyfteats",
+    liveUrl: "https://lyfteats-orcin.vercel.app/",
+  },
+  {
+    title: "TD BAD BANK",
+    category: "MIT CAPSTONE PROJECT, REACTJS, YUP SCHEMA, BOOTSTRAP, LOCAL STORAGE",
+    year: "2023",
+    githubUrl: "https://github.com/Danny-Nunez/TD-Bad-Bank",
+    liveUrl: "https://td-bad-bank.vercel.app/",
+  },
+  {
+    title: "ARV CROSS CHAIN BRIDGE",
+   category: "VUEJS, FIREBASE, CRYPTO",
+    year: "2023",
+    githubUrl: "https://github.com/Danny-Nunez/ARV-CrossChain-Bridge",
+    liveUrl: "https://arv-crosschain-bridge.vercel.app/",
+  },
+  {
+    title: "RANDOM JOKE",
+   category: "REACTJS, JOKE API",
+    year: "2023",
+    githubUrl: "https://github.com/Danny-Nunez/MIT-Module15-FetchApi",
+    liveUrl: "https://mit-module15-fetch-api.vercel.app/",
+  },
+  {
     title: "CRYPTO STATS APP",
     category: "REACT NATIVE",
     year: "2022",
@@ -80,7 +108,7 @@ const ArchivedProjectsList: React.FC<ArchivedProjectsListProps> = ({ onClose }) 
           <h3 className="text-3xl md:text-4xl font-inter-black text-white tracking-tighter uppercase" style={{ wordSpacing: '0.2em' }}>
             Archived Projects
           </h3>
-          <p className="text-gray-500 text-sm uppercase tracking-[0.3em] mt-2">Complete Project Archive</p>
+         
         </div>
 
         {/* Projects List */}
