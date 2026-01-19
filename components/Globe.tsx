@@ -14,10 +14,14 @@ const Globe: React.FC<GlobeProps> = ({ className = '', config = {} }) => {
     let globe: any = null;
 
     if (canvasRef.current) {
+      // Responsive sizing based on screen width
+      const isMobile = window.innerWidth < 768;
+      const globeSize = isMobile ? 400 : 600;
+      
       globe = createGlobe(canvasRef.current, {
         devicePixelRatio: 2,
-        width: 600 * 2,
-        height: 600 * 2,
+        width: globeSize * 2,
+        height: globeSize * 2,
         phi: 0,
         theta: 0,
         dark: 1,

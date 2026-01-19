@@ -77,10 +77,10 @@ const Contact: React.FC = () => {
             I’m usually down to help.
             </p>
 
-            <div className="relative space-y-8">
+            <div className="relative space-y-8 overflow-hidden md:overflow-visible">
               {/* Globe Background - Hidden initially, animates in from bottom on scroll */}
               <div 
-                className={`absolute -left-8 top-[40px] md:-left-20 hidden md:block md:-top-10 w-[280px] h-[280px] md:w-[600px] md:h-[600px] pointer-events-none z-0 transition-all duration-1000 ease-out ${
+                className={`absolute -left-2 top-[-20px] md:-left-20 md:-top-12 w-[400px] h-[400px] md:w-[600px] md:h-[600px] pointer-events-none z-0 transition-all duration-1000 ease-out ${
                   isGlobeVisible 
                     ? 'opacity-20 translate-y-0' 
                     : 'opacity-0 translate-y-32'
@@ -152,10 +152,10 @@ const Contact: React.FC = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/20 hover:text-red-600 text-[10px] uppercase tracking-[0.4em] font-black transition-all border border-white/5 hover:border-red-600 px-4 py-2 rounded-full flex items-center gap-2"
+                  className="text-white/20 hover:text-red-600 text-[8px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.4em] font-black transition-all border border-white/5 hover:border-red-600 px-2 py-1.5 md:px-4 md:py-2 rounded-full flex items-center gap-1 md:gap-2"
                 >
                   {social.icon}
-                  <span>{social.name}</span>
+                  <span className="hidden sm:inline">{social.name}</span>
                 </a>
               ))}
             </div>
