@@ -40,7 +40,11 @@ Keep responses short and conversational. Answer what's asked directly.`;
 
 const SYSTEM_MESSAGE = buildSystemMessage();
 
-const DannyChat: React.FC = () => {
+interface DannyChatProps {
+  onMaximize?: () => void;
+}
+
+const DannyChat: React.FC<DannyChatProps> = ({ onMaximize }) => {
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
     { role: 'assistant', content: 'Hello! How can I help you today?' }
   ]);
@@ -115,14 +119,34 @@ const DannyChat: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md h-[550px] bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] overflow-hidden flex flex-col shadow-2xl shadow-black relative group z-[250]">
+    <div className={`w-full ${onMaximize ? 'max-w-md h-[550px]' : 'h-full'} bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] overflow-hidden flex flex-col shadow-2xl shadow-black relative group ${onMaximize ? 'z-[250]' : ''}`}>
       {/* Header */}
       <div className="p-6 border-b border-white/5 flex items-center justify-between bg-black/20">
         <div className="flex items-center space-x-3">
           <img src="/data/me2.png" alt="Danny" className="w-12 h-12 rounded-full object-cover border border-white/10" />
           <span className="text-[10px] uppercase tracking-[0.3em] font-black text-white/70">Ask Danny</span>
         </div>
-        <div className="w-2 h-2 rounded-full bg-white/10" />
+        <div className="flex items-center gap-3">
+          {onMaximize && (
+            <button
+              onClick={onMaximize}
+              className="w-8 h-8 flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-600/50 rounded-lg text-white/60 hover:text-red-600 transition-all duration-300"
+              title="Maximize"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                {/* Top-left corner */}
+                <path d="M4 4h3v3M4 4v3h3" strokeLinecap="round" />
+                {/* Top-right corner */}
+                <path d="M20 4h-3v3M20 4v3h-3" strokeLinecap="round" />
+                {/* Bottom-left corner */}
+                <path d="M4 20h3v-3M4 20v-3h3" strokeLinecap="round" />
+                {/* Bottom-right corner */}
+                <path d="M20 20h-3v-3M20 20v-3h-3" strokeLinecap="round" />
+              </svg>
+            </button>
+          )}
+          <div className="w-2 h-2 rounded-full bg-white/10" />
+        </div>
       </div>
 
       {/* Messages */}

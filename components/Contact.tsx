@@ -80,7 +80,7 @@ const Contact: React.FC = () => {
             <div className="relative space-y-8">
               {/* Globe Background - Hidden initially, animates in from bottom on scroll */}
               <div 
-                className={`absolute -left-20 top-[40px] md:-top-10 w-[500px] h-[500px] md:w-[600px] md:h-[600px] pointer-events-none z-0 transition-all duration-1000 ease-out ${
+                className={`absolute -left-8 top-[40px] md:-left-20 hidden md:block md:-top-10 w-[280px] h-[280px] md:w-[600px] md:h-[600px] pointer-events-none z-0 transition-all duration-1000 ease-out ${
                   isGlobeVisible 
                     ? 'opacity-20 translate-y-0' 
                     : 'opacity-0 translate-y-32'

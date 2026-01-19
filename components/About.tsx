@@ -8,6 +8,7 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isChatMaximized, setIsChatMaximized] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -157,29 +158,59 @@ const About: React.FC<AboutProps> = () => {
         </div>
 
         {/* Right Visual (Parallax AI Chat Window) - Now order-2 to appear under text on mobile */}
-        <div className="order-2 lg:order-2 flex justify-center relative mt-12 lg:mt-0 z-[250]">
-          <div 
-            className="relative w-full flex justify-center"
-            style={{ transform: `translateY(${getParallaxValue(0.1)}px)` }}
-          >
-            <DannyChat />
-          </div>
-          
-          {/* Experience Badge */}
-          <div 
-            className="absolute -top-12 -right-8 bg-white p-6 md:p-8 rounded-3xl hidden md:block shadow-[0_20px_60px_rgba(0,0,0,0.5)] z-20 border border-black/5"
-            style={{ transform: `translateY(${getParallaxValue(-0.08)}px)` }}
-          >
-            <div className="text-black">
-              <div className="text-4xl md:text-5xl font-black tracking-tighter leading-none mb-1">15+</div>
-              <div className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold opacity-50 whitespace-nowrap">Years of Craft</div>
+        {!isChatMaximized && (
+          <div className="order-2 lg:order-2 flex justify-center relative mt-12 lg:mt-0 z-[250]">
+            <div 
+              className="relative w-full flex justify-center"
+              style={{ transform: `translateY(${getParallaxValue(0.1)}px)` }}
+            >
+              <DannyChat onMaximize={() => setIsChatMaximized(true)} />
             </div>
-            
-            {/* Small decorative "verified" dot */}
-            <div className="absolute top-4 right-4 w-2 h-2 bg-red-600 rounded-full" />
+          
+            {/* Experience Badge */}
+            <div 
+              className="absolute -top-12 -right-8 bg-white p-6 md:p-8 rounded-3xl hidden md:block shadow-[0_20px_60px_rgba(0,0,0,0.5)] z-20 border border-black/5"
+              style={{ transform: `translateY(${getParallaxValue(-0.08)}px)` }}
+            >
+              <div className="text-black">
+                <div className="text-4xl md:text-5xl font-black tracking-tighter leading-none mb-1">15+</div>
+                <div className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold opacity-50 whitespace-nowrap">Years of Craft</div>
+              </div>
+              
+              {/* Small decorative "verified" dot */}
+              <div className="absolute top-4 right-4 w-2 h-2 bg-red-600 rounded-full" />
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Maximized Chat Modal */}
+      {isChatMaximized && (
+        <div 
+          className="fixed inset-0 z-[300] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8 animate-fade-in"
+          onClick={() => setIsChatMaximized(false)}
+        >
+          <div 
+            className="relative w-full max-w-6xl h-full max-h-[95vh] bg-black border border-white/10 rounded-3xl overflow-hidden shadow-2xl animate-fade-in flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setIsChatMaximized(false)}
+              className="absolute top-6 right-6 z-50 w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-red-600/20 border border-white/10 hover:border-red-600/50 rounded-full text-white/60 hover:text-red-600 transition-all duration-300"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Maximized Chat Content - Full Screen */}
+            <div className="w-full h-full flex flex-col p-6">
+              <DannyChat onMaximize={undefined} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };
