@@ -20,6 +20,13 @@ interface Project {
 // Separate archived projects data - edit this list as needed
 const archivedProjects: Project[] = [
   {
+    title: "DOMINICANO UNIDOS",
+    category: "VITE, TAILWIND CSS, JAVASCRIPT, AWS",
+    year: "2025",
+    githubUrl: "https://github.com/Danny-Nunez/DUDB-NON-Profit",
+    liveUrl: "https://dudb-non-profit.vercel.app",
+  },
+  {
     title: "STREET RUN",
     category: "Three.js Game",
     year: "2024",
