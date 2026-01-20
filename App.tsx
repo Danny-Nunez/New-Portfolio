@@ -80,9 +80,9 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#050505] relative">
+    <div className="min-h-screen bg-[#000] relative">
       {loading ? (
-        <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-[#050505]">
+        <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-[#000]">
           <div className="relative">
              <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
              <div className="absolute inset-0 flex items-center justify-center">
