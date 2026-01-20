@@ -26,7 +26,7 @@ const allProjects: Project[] = [
     year: "2025",
     image: "/data/slideshow/04.png",
     modalImage: "/data/tradiantixwide.png",
-    stack: ["NODE.JS", "NEXTJS", "MYSQL"],
+    stack: ["NODE.JS", "VITEJS", "TAILWIND CSS", "MYSQL"],
     description: "Tradiantix is an AI-driven stock trading application built with Next.js, MySQL, and real-time market data from Polygon.io. The platform was engineered for low-latency trade execution, enabling instant buy and sell actions for favorited stocks. I designed and built a custom physical trading dongle that triggers trades directly from the app—developed end-to-end and currently in patent-pending (provisional) status. The platform also leverages AI to analyze live market news, surface high-potential stocks, and automatically generate buy/sell recommendations based on market signals and trend analysis. Result: A fast, extensible trading system combining real-time data, AI-driven insights, and novel hardware interaction.",
     githubUrl: "https://github.com/username/tradiantix",
     liveUrl: "https://tradiantix.com",
