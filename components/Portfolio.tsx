@@ -150,6 +150,7 @@ const Portfolio: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showArchivedProjects, setShowArchivedProjects] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   
   const displayedProjects = isExpanded ? allProjects : allProjects.slice(0, INITIAL_PROJECTS_COUNT);
 
@@ -170,6 +171,29 @@ const Portfolio: React.FC = () => {
       document.body.style.overflow = 'unset';
     };
   }, [selectedProject, showArchivedProjects]);
+
+  // Intersection Observer for fade-in on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-card-index') || '0');
+            setVisibleCards((prev) => new Set(prev).add(index));
+          }
+        });
+      },
+      {
+        threshold: 0.15, // Trigger when 15% of card is visible
+        rootMargin: '0px 0px -50px 0px' // Start slightly before card enters viewport
+      }
+    );
+
+    const cards = document.querySelectorAll('[data-card-index]');
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, [displayedProjects.length]);
   return (
     <section id="portfolio" className="relative w-full py-32 bg-black px-6 md:px-20 overflow-hidden">
       {/* Decorative Technical Background */}
@@ -192,11 +216,21 @@ const Portfolio: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-          {displayedProjects.map((project, idx) => (
+          {displayedProjects.map((project, idx) => {
+            const isVisible = visibleCards.has(idx);
+            return (
             <div 
               key={project.title}
+              data-card-index={idx}
               onClick={() => setSelectedProject(project)}
-              className={`group relative flex flex-col cursor-pointer ${idx % 2 !== 0 ? 'md:mt-32' : ''} animate-fade-in`}
+              className={`group relative flex flex-col cursor-pointer ${idx % 2 !== 0 ? 'md:mt-32' : ''} transition-all duration-700 ease-out ${
+                isVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-20'
+              }`}
+              style={{
+                transitionDelay: isVisible ? `${(idx % 2) * 150}ms` : '0ms'
+              }}
             >
               {/* Image Container */}
               <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/5 bg-zinc-900 shadow-2xl">
@@ -248,7 +282,8 @@ const Portfolio: React.FC = () => {
               {/* Border decoration */}
               <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-red-600 opacity-0 group-hover:opacity-100 transition-all duration-500" />
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* CTA Footer */}

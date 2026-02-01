@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { sendEmail } from '../services/emailService';
-import Globe from './Globe';
 
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -79,15 +78,19 @@ const Contact: React.FC = () => {
 
             <div className="relative space-y-8 overflow-hidden md:overflow-visible">
               {/* Globe Background - Hidden initially, animates in from bottom on scroll */}
-              {/* <div 
-                className={`absolute -left-2 top-[-20px] md:-left-20 md:-top-12 w-[400px] h-[400px] md:w-[600px] md:h-[600px] pointer-events-none z-0 transition-all duration-1000 ease-out ${
+              <div 
+                className={`absolute -left-2 top-[-62px] md:-left-20 md:-top-32 w-[400px] h-[400px] md:w-[600px] md:h-[600px] pointer-events-none z-0 transition-all duration-1000 ease-out ${
                   isGlobeVisible 
                     ? 'opacity-20 translate-y-0' 
                     : 'opacity-0 translate-y-32'
                 }`}
               >
-                <Globe className="w-full h-full" />
-              </div> */}
+                <img 
+                  src="/data/globe.png" 
+                  alt="Globe" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
               
               {/* Email and Location - positioned above globe */}
               <div className="group flex items-center space-x-6 cursor-pointer relative z-10">
