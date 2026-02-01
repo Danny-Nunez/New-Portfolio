@@ -122,17 +122,17 @@ const Hero: React.FC<HeroProps> = ({ assets }) => {
         className="relative z-[60] text-center px-6 w-full max-w-[1200px] pt-32 md:pt-32 pointer-events-auto"
         style={{ transform: `translateY(${-scrollY * 0.12}px)` }}
       >
-        <p className="font-playfair italic text-red-600 text-sm md:text-lg mb-4">
+        <p className="font-playfair italic text-red-600 text-sm md:text-lg mb-2">
           Architecting digital harmony.
         </p>
         
         <h1 
-          className="text-[3.8rem] sm:text-[3.8rem] md:text-[4.2rem] lg:text-[4.8rem] font-inter-black tracking-tighter leading-[0.84] text-white mb-12 select-none uppercase mx-auto transition-all duration-500 max-w-5xl"
+          className="text-[3.1rem] sm:text-[3.1rem] md:text-[4.2rem] lg:text-[4.8rem] font-inter-black tracking-tighter leading-[0.84] text-white mb-12 select-none uppercase mx-auto transition-all duration-500 max-w-5xl"
           style={{ wordSpacing: '0.2em' }}
         >
           <span className="opacity-90">When</span> Design <br className="hidden sm:block" /> <span className="opacity-90">Meets</span> Code
         </h1>
-        
+        <p className="text-white/60 text-xs md:text-md lg:text-lg mt-[-44px] select-none uppercase mx-auto transition-all duration-500 max-w-5xl tracking-tighter lg:leading-[0.84]">through thoughtful, modern web engineering.</p>
         <div className="flex justify-center">
           {/* <button 
             onClick={() => handleNavLinkClick('portfolio')}
