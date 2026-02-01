@@ -127,10 +127,10 @@ const Hero: React.FC<HeroProps> = ({ assets }) => {
         </p>
         
         <h1 
-          className="text-[3.8rem] sm:text-[3.8rem] md:text-[4.2rem] lg:text-[4.8rem] font-inter-black tracking-tighter leading-[0.9] text-white mb-12 select-none uppercase mx-auto transition-all duration-500 max-w-5xl"
+          className="text-[3.8rem] sm:text-[3.8rem] md:text-[4.2rem] lg:text-[4.8rem] font-inter-black tracking-tighter leading-[0.84] text-white mb-12 select-none uppercase mx-auto transition-all duration-500 max-w-5xl"
           style={{ wordSpacing: '0.2em' }}
         >
-          When Design <br className="hidden sm:block" /> Meets Code
+          <span className="opacity-90">When</span> Design <br className="hidden sm:block" /> <span className="opacity-90">Meets</span> Code
         </h1>
         
         <div className="flex justify-center">
