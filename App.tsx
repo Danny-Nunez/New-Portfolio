@@ -25,12 +25,12 @@ const App: React.FC = () => {
         setAssets({
           foreground: "/data/me1.png",
           background: [
-            "/data/tradiantixfullweb.png",
-            "/data/negozeefullweb.png",
-            "/data/briwebfull.png",
-            "/data/chainfullweb.png",
-            "/data/facilfullweb.png",
-            "/data/beatinboxfullweb.png",
+            "/data/tradiantixfullweb.jpg",
+            "/data/negozeefullweb.jpg",
+            "/data/briwebfull.jpg",
+            "/data/chainfullweb.jpg",
+            "/data/facilfullweb.jpg",
+            "/data/beatinboxfullweb.jpg",
             "/data/slideshow/07.png"
           ],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
@@ -62,12 +62,12 @@ const App: React.FC = () => {
         setAssets({
           foreground: "/data/me1.png",
           background: [
-            "/data/tradiantixfullweb.png",
-            "/data/negozeefullweb.png",
-            "/data/briwebfull.png",
-            "/data/chainfullweb.png",
-            "/data/facilfullweb.png",
-            "/data/beatinboxfullweb.png",
+            "/data/tradiantixfullweb.jpg",
+            "/data/negozeefullweb.jpg",
+            "/data/briwebfull.jpg",
+            "/data/chainfullweb.jpg",
+            "/data/facilfullweb.jpg",
+            "/data/beatinboxfullweb.jpg",
             "/data/slideshow/07.png"
           ],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
