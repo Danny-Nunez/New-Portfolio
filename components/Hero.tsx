@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Lottie from 'lottie-react';
 import ImageLoop from './ImageLoop';
 
 interface HeroProps {
@@ -13,17 +14,64 @@ const Hero: React.FC<HeroProps> = ({ assets }) => {
   const [scrollY, setScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [logoData, setLogoData] = useState<object | null>(null);
+  const lottieRef = useRef<any>(null);
+  const lastScrollRef = useRef(0);
+  const playCooldownRef = useRef(false);
+  const isAtStartRef = useRef(true);
+  const playModeRef = useRef<'idle' | 'forward' | 'reverse'>('idle');
 
   useEffect(() => {
-    // Trigger animations on first load
     setIsLoaded(true);
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    fetch('/data/logo.json')
+      .then((res) => res.json())
+      .then(setLogoData)
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const TOP_THRESHOLD = 80; // px from top to trigger reverse play
+
+    const handleScroll = () => {
+      const current = window.scrollY;
+      setScrollY(current);
+
+      if (logoData && lottieRef.current) {
+        const delta = current - lastScrollRef.current;
+        const scrolled = Math.abs(delta) > 10;
+
+        if (scrolled) {
+          if (delta > 0) {
+            // Scroll down: play forward only when at start frame
+            if (!playCooldownRef.current && isAtStartRef.current) {
+              playCooldownRef.current = true;
+              playModeRef.current = 'forward';
+              const item = lottieRef.current?.animationItem;
+              if (item?.resetSegments) item.resetSegments(true);
+              lottieRef.current.setDirection(1);
+              lottieRef.current.goToAndPlay(0);
+            }
+          } else if (current < TOP_THRESHOLD) {
+            // Scroll up AND reaching the top: play in reverse
+            if (!playCooldownRef.current) {
+              playCooldownRef.current = true;
+              playModeRef.current = 'reverse';
+              const anim = lottieRef.current;
+              const item = anim?.animationItem;
+              const totalFrames = item?.totalFrames ?? 60;
+              anim.playSegments([totalFrames - 1, 0], true);
+            }
+          }
+        }
+        lastScrollRef.current = current;
+      }
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [logoData]);
 
   const handleNavLinkClick = (sectionId: string) => {
     // Close mobile menu immediately for responsive feel
@@ -60,44 +108,67 @@ const Hero: React.FC<HeroProps> = ({ assets }) => {
 
       {/* Top Navigation */}
       <nav 
-        className={`fixed top-0 left-0 w-full pt-6 pb-4 px-6 flex justify-between md:justify-center items-center z-[130] transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full pt-6 pb-4 z-[130] transition-all duration-500 ${
           isScrolled && !isMenuOpen ? 'bg-black/40 backdrop-blur-md py-4' : 'bg-transparent'
         } ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
         style={{ transitionDelay: '0ms', transitionDuration: '800ms' }}
       >
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex bg-black/20 backdrop-blur-md border border-white/5 px-6 py-3 rounded-full items-center shadow-2xl">
-          <ul className="flex items-center space-x-12">
-            {navItems.map((item) => (
-              <li key={item}>
-                <button 
-                  onClick={() => handleNavLinkClick(item.toLowerCase())}
-                  className="text-xs font-black tracking-[0.3em] text-white/60 hover:text-red-500 uppercase transition-all duration-300 cursor-pointer"
-                >
-                  {item}
-                </button>
-              </li>
-            ))}
-          </ul>
+        <div className="max-w-7xl mx-auto w-full px-6 flex justify-between items-center">
+        {/* Logo - Left side (Lottie, plays on scroll, stops on last frame) */}
+        <button
+          onClick={() => handleNavLinkClick('home')}
+          className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center cursor-pointer focus:outline-none"
+          aria-label="Home"
+        >
+          {logoData && (
+            <Lottie
+              lottieRef={lottieRef}
+              animationData={logoData}
+              loop={false}
+              autoplay={false}
+              onComplete={() => {
+                playCooldownRef.current = false;
+                if (playModeRef.current === 'forward') {
+                  isAtStartRef.current = false;
+                } else if (playModeRef.current === 'reverse') {
+                  isAtStartRef.current = true;
+                }
+                playModeRef.current = 'idle';
+              }}
+              className="w-full h-full"
+            />
+          )}
+        </button>
+
+        {/* Desktop Navigation - Centered */}
+        <div className="hidden md:flex flex-1 justify-center">
+          <div className="bg-black/20 backdrop-blur-md border border-white/5 px-6 py-3 rounded-full items-center shadow-2xl flex">
+            <ul className="flex items-center space-x-12">
+              {navItems.map((item) => (
+                <li key={item}>
+                  <button 
+                    onClick={() => handleNavLinkClick(item.toLowerCase())}
+                    className="text-xs font-black tracking-[0.3em] text-white/60 hover:text-red-500 uppercase transition-all duration-300 cursor-pointer"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        {/* Mobile Header */}
-        <div className="md:hidden flex w-full justify-between items-center">
-          <button 
-            onClick={() => handleNavLinkClick('home')}
-            className="text-white font-black tracking-tighter text-lg uppercase select-none cursor-pointer"
-          >
-            
-          </button>
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="w-10 h-10 flex flex-col items-center justify-center relative focus:outline-none z-[140]"
-            aria-label="Toggle Menu"
-          >
-            <span className={`absolute w-6 h-0.5 bg-white transition-all duration-300 transform ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}`} />
-            <span className={`absolute w-6 h-0.5 bg-white transition-all duration-200 ${isMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'}`} />
-            <span className={`absolute w-6 h-0.5 bg-white transition-all duration-300 transform ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}`} />
-          </button>
+        {/* Mobile - Spacer for balance, Hamburger on right */}
+        <div className="md:hidden flex-1" />
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden w-10 h-10 flex flex-col items-center justify-center relative focus:outline-none z-[140] flex-shrink-0"
+          aria-label="Toggle Menu"
+        >
+          <span className={`absolute w-6 h-0.5 bg-white transition-all duration-300 transform ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}`} />
+          <span className={`absolute w-6 h-0.5 bg-white transition-all duration-200 ${isMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'}`} />
+          <span className={`absolute w-6 h-0.5 bg-white transition-all duration-300 transform ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}`} />
+        </button>
         </div>
       </nav>
 
