@@ -16,13 +16,12 @@ export const getCriticalImagePaths = (): string[] => {
   return [
     "/data/me1.png",
     "/data/me2.png",
-    "/data/slideshow/01.jpg",
-    "/data/slideshow/02.jpg",
-    "/data/slideshow/03.jpg",
-    "/data/slideshow/04.png",
-    "/data/slideshow/05.png",
-    "/data/slideshow/06.png",
-    "/data/slideshow/07.png"
+    "/data/tradiantixfullweb.png",
+    "/data/negozeefullweb.png",
+    "/data/briwebfull.png",
+    "/data/chainfullweb.png",
+    "/data/facilfullweb.png",
+    "/data/beatinboxfullweb.png",
   ];
 };
 

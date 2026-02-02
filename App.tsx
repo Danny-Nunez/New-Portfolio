@@ -25,12 +25,12 @@ const App: React.FC = () => {
         setAssets({
           foreground: "/data/me1.png",
           background: [
-            "/data/slideshow/01.jpg",
-            "/data/slideshow/02.jpg",
-            "/data/slideshow/03.jpg",
-            "/data/slideshow/04.png",
-            "/data/slideshow/05.png",
-            "/data/slideshow/06.png",
+            "/data/tradiantixfullweb.png",
+            "/data/negozeefullweb.png",
+            "/data/briwebfull.png",
+            "/data/chainfullweb.png",
+            "/data/facilfullweb.png",
+            "/data/beatinboxfullweb.png",
             "/data/slideshow/07.png"
           ],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
@@ -60,14 +60,14 @@ const App: React.FC = () => {
         console.error("App: Error loading assets.", err);
         // Fallback to slideshow images
         setAssets({
-          foreground: "https://dannyfullstack.dev/avatars/me1.png",
+          foreground: "/data/me1.png",
           background: [
-            "/data/slideshow/01.jpg",
-            "/data/slideshow/02.jpg",
-            "/data/slideshow/03.jpg",
-            "/data/slideshow/04.png",
-            "/data/slideshow/05.png",
-            "/data/slideshow/06.png",
+            "/data/tradiantixfullweb.png",
+            "/data/negozeefullweb.png",
+            "/data/briwebfull.png",
+            "/data/chainfullweb.png",
+            "/data/facilfullweb.png",
+            "/data/beatinboxfullweb.png",
             "/data/slideshow/07.png"
           ],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
