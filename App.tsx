@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const [assets, setAssets] = useState<HeroAssets | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState({ loaded: 0, total: 0 });
+  const [isChatModalOpen, setIsChatModalOpen] = useState(false);
 
   useEffect(() => {
     const initAssets = async () => {
@@ -113,8 +114,8 @@ const App: React.FC = () => {
         </div>
       ) : (
         <>
-          <Hero assets={assets!} />
-          <About image={assets!.aboutImage} />
+          <Hero assets={assets!} onOpenChat={() => setIsChatModalOpen(true)} />
+          <About image={assets!.aboutImage} isChatModalOpen={isChatModalOpen} onOpenChat={setIsChatModalOpen} />
           <Portfolio />
           <Contact />
           <FloatingSocials />

@@ -4,11 +4,12 @@ import DannyChat from './DannyChat';
 
 interface AboutProps {
   image: string; // Kept for interface consistency if needed elsewhere, but unused in primary UI now
+  isChatModalOpen?: boolean;
+  onOpenChat?: (open: boolean) => void;
 }
 
-const About: React.FC<AboutProps> = () => {
+const About: React.FC<AboutProps> = ({ isChatModalOpen = false, onOpenChat }) => {
   const [scrollY, setScrollY] = useState(0);
-  const [isChatMaximized, setIsChatMaximized] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -158,13 +159,13 @@ const About: React.FC<AboutProps> = () => {
         </div>
 
         {/* Right Visual (Parallax AI Chat Window) - Now order-2 to appear under text on mobile */}
-        {!isChatMaximized && (
+        {!isChatModalOpen && (
           <div className="order-2 lg:order-2 flex justify-center relative mt-12 lg:mt-0 z-[250]">
             <div 
               className="relative w-full flex justify-center"
               style={{ transform: `translateY(${getParallaxValue(0.1)}px)` }}
             >
-              <DannyChat onMaximize={() => setIsChatMaximized(true)} />
+              <DannyChat onMaximize={() => onOpenChat?.(true)} />
             </div>
           
             {/* Experience Badge */}
@@ -185,10 +186,10 @@ const About: React.FC<AboutProps> = () => {
       </div>
 
       {/* Maximized Chat Modal */}
-      {isChatMaximized && (
+      {isChatModalOpen && (
         <div 
           className="fixed inset-0 z-[300] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8 animate-fade-in"
-          onClick={() => setIsChatMaximized(false)}
+          onClick={() => onOpenChat?.(false)}
         >
           <div 
             className="relative w-full max-w-6xl h-full max-h-[95vh] bg-black border border-white/10 rounded-3xl overflow-hidden shadow-2xl animate-fade-in flex flex-col"
@@ -196,7 +197,7 @@ const About: React.FC<AboutProps> = () => {
           >
             {/* Close Button */}
             <button
-              onClick={() => setIsChatMaximized(false)}
+              onClick={() => onOpenChat?.(false)}
               className="absolute top-6 right-6 z-50 w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-red-600/20 border border-white/10 hover:border-red-600/50 rounded-full text-white/60 hover:text-red-600 transition-all duration-300"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

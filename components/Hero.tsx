@@ -8,9 +8,10 @@ interface HeroProps {
     foreground: string;
     background: string[];
   };
+  onOpenChat?: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ assets }) => {
+const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
   const [scrollY, setScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -157,6 +158,21 @@ const Hero: React.FC<HeroProps> = ({ assets }) => {
             </ul>
           </div>
         </div>
+
+        {/* Desktop - AI Chat button (right) */}
+        {onOpenChat && (
+        <div className="hidden md:flex flex-shrink-0">
+          <button
+            onClick={onOpenChat}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-red-600/20 border border-red-600/50 hover:border-red-600/50 rounded-full text-white/90 hover:text-red-500 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300"
+          >
+            MEET MY AI
+            <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fillRule="evenodd" clipRule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88837 21.6244 10.4003 22 12 22ZM8 13.25C7.58579 13.25 7.25 13.5858 7.25 14C7.25 14.4142 7.58579 14.75 8 14.75H13.5C13.9142 14.75 14.25 14.4142 14.25 14C14.25 13.5858 13.9142 13.25 13.5 13.25H8ZM7.25 10.5C7.25 10.0858 7.58579 9.75 8 9.75H16C16.4142 9.75 16.75 10.0858 16.75 10.5C16.75 10.9142 16.4142 11.25 16 11.25H8C7.58579 11.25 7.25 10.9142 7.25 10.5Z" />
+            </svg>
+          </button>
+        </div>
+        )}
 
         {/* Mobile - Spacer for balance, Hamburger on right */}
         <div className="md:hidden flex-1" />
