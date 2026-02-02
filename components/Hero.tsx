@@ -74,12 +74,27 @@ const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [logoData]);
 
+  const playReverseLogo = () => {
+    if (logoData && lottieRef.current && !playCooldownRef.current) {
+      playCooldownRef.current = true;
+      playModeRef.current = 'reverse';
+      const anim = lottieRef.current;
+      const item = anim?.animationItem;
+      const totalFrames = item?.totalFrames ?? 60;
+      anim.playSegments([totalFrames - 1, 0], true);
+    }
+  };
+
   const handleNavLinkClick = (sectionId: string) => {
     // Close mobile menu immediately for responsive feel
     setIsMenuOpen(false);
 
     // Special case for Home: Scroll to absolute top
     if (sectionId === 'home') {
+      // Trigger reverse Lottie when clicking Home (same as scrolling to top)
+      if (window.scrollY > 80) {
+        playReverseLogo();
+      }
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -142,7 +157,7 @@ const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
         </button>
 
         {/* Desktop Navigation - Centered */}
-        <div className="hidden md:flex flex-1 justify-center">
+        <div className="hidden md:flex flex-1 justify-center pl-24">
           <div className="bg-black/20 backdrop-blur-md border border-white/5 px-6 py-3 rounded-full items-center shadow-2xl flex">
             <ul className="flex items-center space-x-12">
               {navItems.map((item) => (
