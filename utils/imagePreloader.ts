@@ -1,6 +1,6 @@
 // Utility function to preload images
 export const preloadImage = (src: string): Promise<void> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => resolve();
     img.onerror = () => {
@@ -10,6 +10,22 @@ export const preloadImage = (src: string): Promise<void> => {
     img.src = src;
   });
 };
+
+// Preload JSON (e.g. Lottie animation data)
+export const preloadJson = (url: string): Promise<void> => {
+  return fetch(url)
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
+    .then(() => {})
+    .catch((err) => {
+      console.warn(`Failed to preload JSON: ${url}`, err);
+    });
+};
+
+// Nav Lottie logo - preload so it's ready when hero shows
+export const LOTTIE_LOGO_URL = "/data/logo.json";
 
 // Hero section image URLs - single source of truth for loader and App assets
 export const HERO_FOREGROUND = "/data/me1.png";
@@ -100,15 +116,20 @@ export const getAllImagePaths = (): string[] => {
   return [...getCriticalImagePaths(), ...getNonCriticalImagePaths()];
 };
 
-// Preload critical images first (for fast initial render)
+// Preload critical assets (hero images + nav Lottie)
 export const preloadCriticalImages = async (onProgress?: (loaded: number, total: number) => void): Promise<void> => {
   const imagePaths = getCriticalImagePaths();
-  const total = imagePaths.length;
+  const criticalAssets = [...imagePaths, LOTTIE_LOGO_URL];
+  const total = criticalAssets.length;
   let loaded = 0;
 
   await Promise.all(
-    imagePaths.map(async (src) => {
-      await preloadImage(src);
+    criticalAssets.map(async (url) => {
+      if (url.endsWith(".json")) {
+        await preloadJson(url);
+      } else {
+        await preloadImage(url);
+      }
       loaded++;
       if (onProgress) {
         onProgress(loaded, total);
