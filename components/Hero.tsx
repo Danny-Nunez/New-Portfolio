@@ -232,9 +232,9 @@ const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
           className="text-[3.1rem] sm:text-[3.1rem] md:text-[4.2rem] lg:text-[4.8rem] font-inter-black tracking-tighter leading-[0.84] text-white mb-12 select-none uppercase mx-auto transition-all duration-500 max-w-5xl"
           style={{ wordSpacing: '0.2em' }}
         >
-          <span className="opacity-90">When</span> Design <br className="hidden sm:block" /> <span className="opacity-90">Meets</span> Code
+           Fullstack <br className="hidden sm:block" /> Engineer
         </h1>
-        <p className="text-white/60 text-xs md:text-md lg:text-lg mt-[-44px] select-none uppercase mx-auto transition-all duration-500 max-w-5xl tracking-tighter lg:leading-[0.84]">through thoughtful, modern web engineering.</p>
+        <p className="text-white/60 text-xs md:text-md lg:text-lg mt-[-44px] select-none uppercase mx-auto transition-all duration-500 max-w-5xl tracking-tighter lg:leading-[0.84]">Based out of Baltimore, MD</p>
         <div className="flex justify-center">
           {/* <button 
             onClick={() => handleNavLinkClick('portfolio')}
