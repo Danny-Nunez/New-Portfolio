@@ -11,23 +11,29 @@ export const preloadImage = (src: string): Promise<void> => {
   });
 };
 
-// Get critical images (hero section - above the fold)
+// Hero section image URLs - single source of truth for loader and App assets
+export const HERO_FOREGROUND = "/data/me1.png";
+export const HERO_BACKGROUND = [
+  "/data/tradiantixfullweb.jpg",
+  "/data/negozeefullweb.jpg",
+  "/data/briwebfull.jpg",
+  "/data/chainfullweb.jpg",
+  "/data/facilfullweb.jpg",
+  "/data/beatinboxfullweb.jpg",
+  "/data/slideshow/07.png",
+];
+
+// Get critical images (hero section - foreground + ImageLoop carousel)
 export const getCriticalImagePaths = (): string[] => {
-  return [
-    "/data/me1.png",
-    "/data/me2.png",
-    "/data/tradiantixfullweb.png",
-    "/data/negozeefullweb.png",
-    "/data/briwebfull.png",
-    "/data/chainfullweb.png",
-    "/data/facilfullweb.png",
-    "/data/beatinboxfullweb.png",
-  ];
+  return [HERO_FOREGROUND, ...HERO_BACKGROUND];
 };
 
 // Get non-critical images (below the fold - can load in background)
 export const getNonCriticalImagePaths = (): string[] => {
-  // About section credential logos
+  // About section (e.g. chat avatar)
+  const aboutImages = ["/data/me2.png"];
+
+  // Credential logos
   const credentialImages = [
     "/data/harvard.png",
     "/data/mit.png",
@@ -85,7 +91,7 @@ export const getNonCriticalImagePaths = (): string[] => {
   ];
 
   // Combine and remove duplicates
-  const allImages = [...credentialImages, ...portfolioImages];
+  const allImages = [...aboutImages, ...credentialImages, ...portfolioImages];
   return Array.from(new Set(allImages));
 };
 

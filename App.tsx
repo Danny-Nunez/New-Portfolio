@@ -6,7 +6,7 @@ import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import FloatingSocials from './components/FloatingSocials';
 import { generateHeroAssets, HeroAssets } from './services/geminiService';
-import { preloadCriticalImages, preloadNonCriticalImages } from './utils/imagePreloader';
+import { preloadCriticalImages, preloadNonCriticalImages, HERO_FOREGROUND, HERO_BACKGROUND } from './utils/imagePreloader';
 
 const App: React.FC = () => {
   const [assets, setAssets] = useState<HeroAssets | null>(null);
@@ -22,18 +22,10 @@ const App: React.FC = () => {
       try {
         setLoading(true);
         
-        // Set assets first
+        // Set assets first (use same URLs as preloader so Hero/ImageLoop images are preloaded)
         setAssets({
-          foreground: "/data/me1.png",
-          background: [
-            "/data/tradiantixfullweb.jpg",
-            "/data/negozeefullweb.jpg",
-            "/data/briwebfull.jpg",
-            "/data/chainfullweb.jpg",
-            "/data/facilfullweb.jpg",
-            "/data/beatinboxfullweb.jpg",
-            "/data/slideshow/07.png"
-          ],
+          foreground: HERO_FOREGROUND,
+          background: [...HERO_BACKGROUND],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });
 
@@ -61,16 +53,8 @@ const App: React.FC = () => {
         console.error("App: Error loading assets.", err);
         // Fallback to slideshow images
         setAssets({
-          foreground: "/data/me1.png",
-          background: [
-            "/data/tradiantixfullweb.jpg",
-            "/data/negozeefullweb.jpg",
-            "/data/briwebfull.jpg",
-            "/data/chainfullweb.jpg",
-            "/data/facilfullweb.jpg",
-            "/data/beatinboxfullweb.jpg",
-            "/data/slideshow/07.png"
-          ],
+          foreground: HERO_FOREGROUND,
+          background: [...HERO_BACKGROUND],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });
         setLoading(false);
