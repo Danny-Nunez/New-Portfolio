@@ -265,7 +265,7 @@ const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
       </div>
 
       <div 
-        className="absolute bottom-0 w-full h-[60vh] md:h-[65vh] lg:h-[65vh] flex justify-center z-50 pointer-events-none"
+        className="absolute bottom-0 w-full h-[72vh] md:h-[75vh] lg:h-[75vh] flex justify-center z-50 pointer-events-none"
         style={{ transform: `translateY(${scrollY * 0.05}px)` }}
       >
         <div className="relative h-full flex justify-center items-end">
