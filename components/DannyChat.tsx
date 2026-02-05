@@ -1,6 +1,4 @@
-
 import React, { useState, useRef, useEffect } from 'react';
-import OpenAI from 'openai';
 import aboutData from '../data/about.json';
 
 // Build system message with few-shot examples
@@ -51,24 +49,12 @@ const DannyChat: React.FC<DannyChatProps> = ({ onMaximize }) => {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const openaiRef = useRef<OpenAI | null>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, isTyping]);
-
-  const getOpenAI = (): OpenAI => {
-    if (!openaiRef.current) {
-      const apiKey = process.env.OPENAI_API_KEY;
-      if (!apiKey) {
-        throw new Error('OPENAI_API_KEY is not set');
-      }
-      openaiRef.current = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
-    }
-    return openaiRef.current;
-  };
 
   const handleSend = async () => {
     if (!input.trim() || isTyping) return;
@@ -78,41 +64,39 @@ const DannyChat: React.FC<DannyChatProps> = ({ onMaximize }) => {
     setIsTyping(true);
 
     const userMessage = { role: 'user' as const, content: userMsg };
-
-    // Build conversation history for API call (use current messages state)
     const allMessages = [...messages, userMessage];
-    
-    // Add user message to state
     setMessages(allMessages);
 
-    try {
-      const openai = getOpenAI();
-      
-      // Format messages for OpenAI API with system message at the start
-      const apiMessages: Array<{role: 'system' | 'user' | 'assistant', content: string}> = [
-        { role: 'system', content: SYSTEM_MESSAGE },
-        ...allMessages.map(msg => ({
-          role: msg.role,
-          content: msg.content
-        }))
-      ];
-      
-      console.log('Sending to OpenAI:', apiMessages);
-      console.log('Number of messages:', apiMessages.length);
+    const apiMessages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
+      { role: 'system', content: SYSTEM_MESSAGE },
+      ...allMessages.map((msg) => ({ role: msg.role, content: msg.content })),
+    ];
 
-      // Make API call outside of setState
-      const response = await openai.chat.completions.create({
-        model: 'gpt-4o',
-        messages: apiMessages,
-        temperature: 0.7,
-        max_tokens: 150,
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: apiMessages }),
       });
 
-      const text = response.choices[0]?.message?.content || "I'm sorry, I couldn't process that. Please try again!";
-      setMessages(prev => [...prev, { role: 'assistant', content: text }]);
+      const raw = await res.text();
+      let data: { content?: string; error?: string } = {};
+      if (raw) {
+        try {
+          data = JSON.parse(raw);
+        } catch {
+          throw new Error(res.ok ? 'Invalid response' : 'Request failed');
+        }
+      }
+      if (!res.ok) {
+        throw new Error(data.error || 'Request failed');
+      }
+      const text = data.content ?? "I'm sorry, I couldn't process that. Please try again!";
+      setMessages((prev) => [...prev, { role: 'assistant', content: text }]);
     } catch (err) {
-      console.error("Chat error:", err);
-      setMessages(prev => [...prev, { role: 'assistant', content: "Technical error. Please try again later." }]);
+      console.error('Chat error:', err);
+      const message = err instanceof Error ? err.message : 'Technical error. Please try again later.';
+      setMessages((prev) => [...prev, { role: 'assistant', content: message }]);
     } finally {
       setIsTyping(false);
     }
