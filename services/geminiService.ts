@@ -14,7 +14,7 @@ export interface HeroAssets {
 export const generateHeroAssets = async (): Promise<HeroAssets> => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-  const foregroundUrl = "https://dannyfullstack.dev/avatars/me1.png";
+  const foregroundUrl = "https://dannynunez.dev/avatars/me1.png";
 
   const bgPrompts = [
     "Futuristic command center UI, glowing red and white, data nodes and connections, cinematic, 4k.",

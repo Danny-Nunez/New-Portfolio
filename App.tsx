@@ -107,7 +107,7 @@ const App: React.FC = () => {
       )}
       
       <footer className="py-20 text-center text-gray-700 text-[10px] tracking-[0.5em] uppercase border-t border-white/5 mx-8 bg-black">
-        <div className="mb-4 text-white font-black tracking-tighter text-xl">DANNYFULLSTACK.DEV</div>
+        <div className="mb-4 text-white font-black tracking-tighter text-xl">DANNYNUNEZ.DEV</div>
         <p>&copy; 2026 | ARCHITECTING DIGITAL PRODUCTS</p>
       </footer>
     </div>

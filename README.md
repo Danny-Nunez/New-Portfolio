@@ -170,7 +170,7 @@ This project is configured for Vercel deployment:
 
 **Danny Nunez**
 - Email: dnunez22@gmail.com
-- Portfolio: [dannyfullstack.dev](https://dannyfullstack.dev)
+- Portfolio: [dannyfullstack.dev](https://dannynunez.dev)
 - LinkedIn: [Danny Nunez](https://www.linkedin.com/in/danny-nunez-a7886b209)
 - GitHub: [Danny-Nunez](https://github.com/Danny-Nunez)
 
