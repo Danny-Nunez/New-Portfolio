@@ -11,8 +11,12 @@ interface HeroProps {
   onOpenChat?: () => void;
 }
 
+const SECTION_IDS = ['home', 'about', 'portfolio', 'contact'] as const;
+const ACTIVE_OFFSET = 120; // px from top of viewport to consider section "active"
+
 const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
   const [scrollY, setScrollY] = useState(0);
+  const [activeSection, setActiveSection] = useState<string>('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [logoData, setLogoData] = useState<object | null>(null);
@@ -73,6 +77,23 @@ const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [logoData]);
+
+  // Track which section is in view for desktop nav highlight
+  useEffect(() => {
+    const updateActiveSection = () => {
+      let next = 'home';
+      for (const id of SECTION_IDS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= ACTIVE_OFFSET) next = id;
+      }
+      setActiveSection(next);
+    };
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    return () => window.removeEventListener('scroll', updateActiveSection);
+  }, []);
 
   const playReverseLogo = () => {
     if (logoData && lottieRef.current && !playCooldownRef.current) {
@@ -160,16 +181,20 @@ const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
         <div className="hidden md:flex flex-1 justify-center pl-24">
           <div className="bg-black/20 backdrop-blur-md border border-white/5 px-6 py-3 rounded-full items-center shadow-2xl flex">
             <ul className="flex items-center space-x-12">
-              {navItems.map((item) => (
-                <li key={item}>
-                  <button 
-                    onClick={() => handleNavLinkClick(item.toLowerCase())}
-                    className="text-xs font-black tracking-[0.3em] text-white/60 hover:text-red-500 uppercase transition-all duration-300 cursor-pointer"
-                  >
-                    {item}
-                  </button>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const sectionId = item.toLowerCase();
+                const isActive = activeSection === sectionId;
+                return (
+                  <li key={item}>
+                    <button 
+                      onClick={() => handleNavLinkClick(sectionId)}
+                      className={`text-xs font-black tracking-[0.3em] uppercase transition-all duration-300 cursor-pointer hover:text-red-500 ${isActive ? 'text-red-500' : 'text-white/60'}`}
+                    >
+                      {item}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -206,16 +231,20 @@ const Hero: React.FC<HeroProps> = ({ assets, onOpenChat }) => {
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 z-[115] bg-black/90 backdrop-blur-[40px] transition-all duration-700 ease-in-out md:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="flex flex-col items-center justify-center h-full space-y-8">
-          {navItems.map((item, idx) => (
-            <button 
-              key={item}
-              onClick={() => handleNavLinkClick(item.toLowerCase())}
-              className={`text-4xl font-black tracking-tighter text-white hover:text-red-500 uppercase transition-all duration-300 transform ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-              style={{ transitionDelay: `${idx * 100}ms` }}
-            >
-              {item}
-            </button>
-          ))}
+          {navItems.map((item, idx) => {
+            const sectionId = item.toLowerCase();
+            const isActive = activeSection === sectionId;
+            return (
+              <button 
+                key={item}
+                onClick={() => handleNavLinkClick(sectionId)}
+                className={`text-4xl font-black tracking-tighter uppercase transition-all duration-300 transform hover:text-red-500 ${isActive ? 'text-red-500' : 'text-white'} ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                style={{ transitionDelay: `${idx * 100}ms` }}
+              >
+                {item}
+              </button>
+            );
+          })}
         </div>
       </div>
 
