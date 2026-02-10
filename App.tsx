@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import Lottie from 'lottie-react';
 import Hero from './components/Hero';
 import About from './components/About';
 import Portfolio from './components/Portfolio';
@@ -12,7 +12,15 @@ const App: React.FC = () => {
   const [assets, setAssets] = useState<HeroAssets | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState({ loaded: 0, total: 0 });
+  const [loaderData, setLoaderData] = useState<object | null>(null);
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
+
+  useEffect(() => {
+    fetch('/data/dnloader.json')
+      .then((res) => res.json())
+      .then(setLoaderData)
+      .catch(() => setLoaderData(null));
+  }, []);
 
   useEffect(() => {
     const initAssets = async () => {
@@ -68,11 +76,17 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-[#000] relative">
       {loading ? (
         <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-[#000]">
-          <div className="relative">
-             <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-             <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse"></div>
-             </div>
+          <div className="w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
+            {loaderData ? (
+              <Lottie animationData={loaderData} loop className="w-full h-full" />
+            ) : (
+              <div className="relative w-16 h-16">
+                <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse" />
+                </div>
+              </div>
+            )}
           </div>
           <div className="text-center px-6 max-w-sm">
             <p className="text-white font-bold tracking-widest uppercase text-xs mb-2">Architecting Your Experience</p>
