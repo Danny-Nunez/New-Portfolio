@@ -48,9 +48,10 @@ const App: React.FC = () => {
 
         // Wait for minimum load time if needed, then show content
         await new Promise(resolve => setTimeout(resolve, remainingTime));
-        
-        // Hide loader and show content
-        setLoading(false);
+
+        // Lock preloader for testing: open with ?preloader=1 in the URL
+        const lockPreloader = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('preloader') === '1';
+        if (!lockPreloader) setLoading(false);
 
         // Continue loading non-critical images in background
         preloadNonCriticalImages().catch(err => {
@@ -65,7 +66,8 @@ const App: React.FC = () => {
           background: [...HERO_BACKGROUND],
           aboutImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
         });
-        setLoading(false);
+        const lockPreloader = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('preloader') === '1';
+        if (!lockPreloader) setLoading(false);
       }
     };
 
@@ -76,14 +78,18 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-[#000] relative">
       {loading ? (
         <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-[#000]">
-          <div className="w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
+          <div className="flex items-center justify-center overflow-visible">
             {loaderData ? (
-              <Lottie animationData={loaderData} loop className="w-full h-full" />
+              <div className="h-12 w-auto md:h-16" style={{ aspectRatio: '580/300' }}>
+                <Lottie animationData={loaderData} loop className="w-full h-full" />
+              </div>
             ) : (
-              <div className="relative w-16 h-16">
-                <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse" />
+              <div className="w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
+                <div className="relative w-16 h-16">
+                  <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse" />
+                  </div>
                 </div>
               </div>
             )}
