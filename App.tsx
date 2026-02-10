@@ -16,20 +16,21 @@ const App: React.FC = () => {
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch('/data/dnloader.json')
-      .then((res) => res.json())
-      .then(setLoaderData)
-      .catch(() => setLoaderData(null));
-  }, []);
-
-  useEffect(() => {
     const initAssets = async () => {
       const startTime = Date.now();
       const MIN_LOAD_TIME = 800; // Minimum loader display time (800ms) for smooth UX
-      
+
       try {
         setLoading(true);
-        
+
+        // Load Lottie preloader first so we never show the old spinner
+        try {
+          const res = await fetch('/data/dnloader.json');
+          if (res.ok) setLoaderData(await res.json());
+        } catch {
+          setLoaderData(null);
+        }
+
         // Set assets first (use same URLs as preloader so Hero/ImageLoop images are preloaded)
         setAssets({
           foreground: HERO_FOREGROUND,
@@ -80,18 +81,14 @@ const App: React.FC = () => {
         <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-[#000]">
           <div className="flex items-center justify-center overflow-visible">
             {loaderData ? (
-              <div className="h-12 w-auto md:h-16" style={{ aspectRatio: '580/300' }}>
-                <Lottie animationData={loaderData} loop className="w-full h-full" />
-              </div>
-            ) : (
-              <div className="w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
-                <div className="relative w-16 h-16">
-                  <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse" />
-                  </div>
+              <>
+                <div className="h-12 w-auto md:h-16" style={{ aspectRatio: '580/300' }}>
+                  <Lottie animationData={loaderData} loop className="w-full h-full" />
                 </div>
-              </div>
+              </>
+            ) : (
+              /* Don't show the old spinner — keep placeholder until dnloader.json has loaded */
+              <div className="h-24 md:h-32" style={{ aspectRatio: '580/300', width: 'auto', minWidth: 0 }} />
             )}
           </div>
           <div className="text-center px-6 max-w-sm">
